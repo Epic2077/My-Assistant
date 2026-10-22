@@ -1,0 +1,11 @@
+node_modules/
+.env
+.data/
+data/state.json
+.wwebjs_auth/
+.wwebjs_cache/
+*.log
+.DS_Store
+
+# Personal Telegram MTProto login session (full account credential)
+data/*.session

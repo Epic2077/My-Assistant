@@ -1,0 +1,24 @@
+{
+  "name": "personal-gatekeeper",
+  "version": "0.3.0",
+  "private": true,
+  "description": "Local-first AI personal secretary with explicit per-chat consent for Telegram user-client processing.",
+  "type": "module",
+  "engines": {
+    "node": ">=22.6.0"
+  },
+  "scripts": {
+    "dev": "node --experimental-strip-types --watch src/index.ts",
+    "start": "node --experimental-strip-types src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-strip-types --test",
+    "telegram:user-login": "node --experimental-strip-types scripts/telegram-user-login.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.30",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "teleproto": "^1.230.1"
+  }
+}

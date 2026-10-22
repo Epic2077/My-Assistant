@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <title>Personal Gatekeeper</title>
+  <style>
+    :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#eaf0fa;background:#0b1020;font-synthesis:none;text-rendering:optimizeLegibility;--panel:#11192c;--panel2:#151f35;--line:#27344d;--muted:#9aa8c1;--text:#eaf0fa;--cyan:#71ddd5;--purple:#a9a2ff;--green:#74dba4;--red:#ff8c9b;--yellow:#f2c875}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 10% 0%,#182949 0,transparent 42%),radial-gradient(ellipse at 100% 4%,#24224c 0,transparent 35%),#0b1020;color:var(--text);min-height:100vh}button,input,select,textarea{font:inherit}button{cursor:pointer;border:1px solid var(--line);border-radius:10px;padding:10px 13px;background:#1c2942;color:var(--text);transition:transform .12s,border-color .12s,background .12s}button:hover{border-color:#6b86b8;background:#253553}button:active{transform:translateY(1px)}button.primary{background:linear-gradient(135deg,#a9a2ff,#71ddd5);color:#0b1020;border:0;font-weight:800}button.danger{color:#ffabb5;border-color:#633947;background:#281a2a}button.small{padding:6px 9px;font-size:12px}button:disabled{opacity:.45;cursor:not-allowed}input,select,textarea{width:100%;background:#0b1324;color:var(--text);border:1px solid #30405d;border-radius:10px;padding:10px 11px;outline:none}input:focus,select:focus,textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 3px #71ddd51a}textarea{resize:vertical;min-height:86px}label{display:block;font-size:12px;font-weight:700;color:#bdc9dd;margin-bottom:7px;letter-spacing:.02em}.muted{color:var(--muted)}.tiny{font-size:11px}.subtle{font-size:13px;color:var(--muted);line-height:1.55}.topbar{max-width:1420px;margin:auto;padding:28px 26px 18px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:13px}.logo{width:47px;height:47px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,#a9a2ff,#71ddd5);color:#0b1020;font-size:22px;font-weight:950;box-shadow:0 9px 32px #71ddd52b}.brand h1{font-size:20px;margin:0;letter-spacing:-.03em}.brand p{margin:4px 0 0;font-size:12px;color:var(--muted)}.top-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap;justify-content:flex-end}.status-pill{font-size:11px;border:1px solid var(--line);padding:7px 10px;border-radius:100px;background:#11192c;color:var(--muted);display:flex;align-items:center;gap:7px}.dot{display:inline-block;width:7px;height:7px;background:var(--yellow);border-radius:50%}.dot.green{background:var(--green)}.dot.red{background:var(--red)}main{max-width:1420px;margin:0 auto;padding:0 26px 36px}.hero{display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:12px;margin-bottom:14px}.hero-card,.panel{border:1px solid var(--line);border-radius:18px;background:linear-gradient(155deg,#151f35ee,#0f1728f2);box-shadow:0 16px 48px #02051133}.hero-card{padding:17px 18px;min-height:124px;position:relative;overflow:hidden}.hero-card::after{content:"";position:absolute;right:-35px;top:-55px;width:135px;height:135px;border-radius:50%;border:1px solid #ffffff0a;box-shadow:0 0 0 19px #ffffff04,0 0 0 38px #ffffff02}.eyebrow{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);font-weight:800}.hero-title{font-size:24px;line-height:1.18;letter-spacing:-.04em;font-weight:800;margin:10px 0 6px}.hero-desc{font-size:12px;color:var(--muted);max-width:390px;line-height:1.5}.hero-bottom{display:flex;align-items:center;gap:8px;margin-top:13px}.pill{border-radius:999px;padding:5px 8px;font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;background:#1d2941;color:var(--muted);border:1px solid #2c3c58}.pill.success{color:#8fe8b6;background:#102b28;border-color:#20534b}.pill.warning{color:#f4d28d;background:#302719;border-color:#5c4824}.pill.danger{color:#ffacb8;background:#351e2b;border-color:#643347}.metric{font-size:22px;font-weight:800;letter-spacing:-.04em;margin-top:11px}.metric-label{font-size:12px;color:var(--muted);margin-top:4px}.layout{display:grid;grid-template-columns:minmax(310px,.9fr) minmax(420px,1.1fr);gap:14px;align-items:start}.column{display:grid;gap:14px;min-width:0}.panel{padding:18px}.panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:16px}.panel-head h2{font-size:15px;margin:0;letter-spacing:-.015em}.panel-head p{font-size:12px;color:var(--muted);margin:5px 0 0;line-height:1.45}.section-icon{width:31px;height:31px;flex-shrink:0;border:1px solid #394968;border-radius:10px;display:grid;place-items:center;color:var(--cyan);background:#14253a;font-size:15px}.fields{display:grid;gap:13px}.two{display:grid;grid-template-columns:1fr 1fr;gap:11px}.field{min-width:0}.toggle-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px;border:1px solid var(--line);border-radius:12px;background:#0d1628}.toggle-copy{min-width:0}.toggle-copy b{font-size:12px;display:block}.toggle-copy span{display:block;font-size:11px;color:var(--muted);margin-top:4px;line-height:1.45}.switch{appearance:none;width:40px;height:24px;flex:none;border-radius:50px;background:#2b3952;position:relative;padding:0;border:1px solid #425270;cursor:pointer}.switch:before{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#d6deeb;transition:left .15s}.switch:checked{background:#307b79;border-color:#58c5b6}.switch:checked:before{left:19px;background:#e8fffa}.checkline{display:flex;gap:9px;align-items:flex-start;font-size:12px;color:#d6deee;line-height:1.4}.checkline input{width:auto;margin:2px 0 0;accent-color:var(--cyan)}.form-actions{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-top:15px}.hint{padding:10px 12px;background:#101f30;border:1px solid #213f4c;border-radius:10px;font-size:11px;color:#a9c5ce;line-height:1.55}.profile-list{display:grid;gap:7px;margin-bottom:15px}.profile-item{display:flex;align-items:center;text-align:left;gap:10px;background:#0d1628;border:1px solid #27364f;border-radius:12px;padding:10px;width:100%}.profile-item.active{border-color:#71ddd5;background:#112531}.avatar{width:34px;height:34px;flex:none;display:grid;place-items:center;border-radius:11px;background:#20294d;color:#c7c0ff;font-size:13px;font-weight:800}.profile-text{flex:1;min-width:0}.profile-text strong{display:block;font-size:12px;font-weight:750}.profile-text small{display:block;color:var(--muted);font-size:10px;margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.profile-tag{font-size:9px;border-radius:6px;padding:4px 6px;background:#1f2c42;color:#aab8ce;white-space:nowrap}.mini-title{font-size:11px;font-weight:800;margin:17px 0 10px;color:#c5d3e8;letter-spacing:.04em;text-transform:uppercase}.test-output{margin-top:12px;border-radius:12px;border:1px solid #33445f;background:#0a1222;padding:13px;display:none}.test-output.show{display:block}.decision-top{display:flex;align-items:center;gap:8px;margin-bottom:9px}.decision-name{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em}.decision-reply{white-space:pre-wrap;font-size:12px;line-height:1.6;color:#e2eaf8}.decision-summary{font-size:11px;line-height:1.5;color:var(--muted);margin-top:9px}.alert-list,.event-list{display:grid;gap:8px}.alert-card{padding:12px;border:1px solid #3a3443;background:#171a2a;border-radius:12px;display:flex;gap:10px;align-items:flex-start}.alert-card.urgent{border-color:#673444;background:#2a1926}.alert-card.vip{border-color:#51472b;background:#292418}.alert-symbol{flex:none;width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:#392235;color:#ffacb8}.alert-card.vip .alert-symbol{background:#3b3220;color:var(--yellow)}.alert-main{flex:1;min-width:0}.alert-main strong{font-size:12px;display:block}.alert-main p{font-size:11px;color:#b7c0d1;line-height:1.5;margin:5px 0 0;word-break:break-word}.alert-meta{font-size:10px;color:#8290a8;margin-top:7px}.empty{padding:22px 12px;text-align:center;border:1px dashed #34425a;border-radius:12px;color:var(--muted);font-size:12px;line-height:1.6}.event{display:grid;grid-template-columns:10px minmax(0,1fr);gap:10px;padding:10px 0;border-bottom:1px solid #202b40}.event:last-child{border-bottom:0}.event-dot{width:7px;height:7px;border-radius:50%;background:#8a91ff;margin:5px 0 0 2px}.event-main{min-width:0}.event-main strong{font-size:11px;display:inline-block;margin-right:6px}.event-main p{font-size:11px;line-height:1.5;color:#aab7cd;white-space:pre-wrap;overflow-wrap:anywhere;margin:4px 0 0}.event-time{font-size:10px;color:#71809b;margin-top:5px}.footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:10px;color:#72819a;padding:18px 3px 0}.rule{height:1px;background:#27344d;margin:16px 0}.notice{position:fixed;right:18px;bottom:18px;max-width:360px;padding:12px 15px;border:1px solid #536b89;border-radius:12px;background:#17253b;color:var(--text);font-size:12px;line-height:1.5;box-shadow:0 15px 55px #0007;display:none;z-index:5}.notice.show{display:block}.disclaimer{font-size:11px;color:#8291a8;line-height:1.55}.connection-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.connection{border:1px solid var(--line);border-radius:12px;background:#0c1526;padding:11px}.connection strong{font-size:11px;display:block}.connection span{font-size:10px;color:var(--muted);display:block;margin-top:5px;overflow-wrap:anywhere}.bottom-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+    @media(max-width:1000px){.hero{grid-template-columns:1fr 1fr}.hero-card:first-child{grid-column:1/-1}.layout{grid-template-columns:1fr}.bottom-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:620px){.topbar{padding:21px 15px 14px;align-items:flex-start;flex-direction:column}.top-actions{justify-content:flex-start}main{padding:0 13px 25px}.hero{grid-template-columns:1fr 1fr;gap:8px}.hero-card{padding:14px;min-height:110px}.hero-title{font-size:20px}.hero-card:first-child{grid-column:1/-1}.layout{gap:10px}.panel{padding:14px}.two,.bottom-grid{grid-template-columns:1fr}.connection-grid{grid-template-columns:1fr 1fr}.form-actions button{flex:1}.profile-tag{display:none}.brand h1{font-size:19px}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><div class="logo">PG</div><div><h1>Personal Gatekeeper</h1><p>Your focus, protected. Your people, looked after.</p></div></div>
+    <div class="top-actions">
+      <div class="status-pill"><span class="dot green" id="localDot"></span><span>Local-only dashboard</span></div>
+      <button class="small" id="notifyBtn">Enable desktop alerts</button>
+      <button class="small" id="refreshBtn">↻ Refresh</button>
+    </div>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="hero-card"><div class="eyebrow">Current mode</div><div class="hero-title" id="heroMode">Loading…</div><div class="hero-desc" id="heroReason">Checking the local assistant state.</div><div class="hero-bottom"><span class="pill" id="modeBadge">INITIALIZING</span><span class="pill warning" id="dryBadge">DRY RUN</span></div></div>
+      <div class="hero-card"><div class="eyebrow">People configured</div><div class="metric" id="profileCount">—</div><div class="metric-label">Personalized communication profiles</div><div class="hero-bottom"><span class="pill" id="conversationCount">0 conversations</span></div></div>
+      <div class="hero-card"><div class="eyebrow">Needs your attention</div><div class="metric" id="alertCount">0</div><div class="metric-label">Unacknowledged alerts</div><div class="hero-bottom"><span class="pill" id="connectorBadge">CONNECTORS OFF</span></div></div>
+    </section>
+
+    <section class="layout">
+      <div class="column">
+        <section class="panel">
+          <div class="panel-head"><div><h2>Busy Mode</h2><p>Set the reason, end time, and interruption policy.</p></div><div class="section-icon">◷</div></div>
+          <form id="modeForm">
+            <div class="fields">
+              <div class="toggle-row"><div class="toggle-copy"><b>Busy Mode active</b><span>Incoming messages are assessed only while this is on.</span></div><input class="switch" id="modeEnabled" type="checkbox" aria-label="Busy Mode active"></div>
+              <div class="field"><label for="reason">WHAT ARE YOU BUSY WITH?</label><input id="reason" maxlength="180" value="deep work" placeholder="Deep work, gym, meeting…" required></div>
+              <div class="field"><label for="availableAt">AVAILABLE AGAIN AT</label><input id="availableAt" type="datetime-local" required><div class="subtle tiny" style="margin-top:5px">Uses your computer's local time. Busy Mode switches off automatically at this time.</div></div>
+              <div class="field"><label for="policy">INTERRUPTION POLICY</label><select id="policy"><option value="strict">Strict — only critical issues interrupt</option><option value="balanced" selected>Balanced — urgent issues + VIP rules</option><option value="flexible">Flexible — alert me when uncertain</option></select></div>
+            </div>
+            <div class="form-actions"><button type="submit" class="primary">Save Busy Mode</button><button type="button" id="disableModeBtn">Turn Busy Mode off</button></div>
+          </form>
+          <div class="rule"></div>
+          <div class="toggle-row"><div class="toggle-copy"><b>Dry-run safety lock</b><span id="dryDescription">Simulate decisions; do not send outbound messages.</span></div><input class="switch" id="dryRun" type="checkbox" aria-label="Dry run enabled"></div>
+          <div class="hint" style="margin-top:11px">Start with dry-run. Watch the decisions and replies in Activity, test message examples, then deliberately switch to live sending only after you trust the behavior.</div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head"><div><h2>Test the AI decision</h2><p>Try realistic messages without sending anything to anyone.</p></div><div class="section-icon">✳</div></div>
+          <div class="fields">
+            <div class="field"><label for="testProfile">SENDER PROFILE</label><select id="testProfile"></select></div>
+            <div class="field"><label for="testSender">SENDER DISPLAY NAME (OPTIONAL)</label><input id="testSender" placeholder="e.g. Reza"></div>
+            <div class="field"><label for="testMessage">SAMPLE INCOMING MESSAGE</label><textarea id="testMessage" placeholder="e.g. The checkout is down for every customer and payments are failing."></textarea></div>
+            <div class="form-actions"><button class="primary" type="button" id="testBtn">Run decision preview</button><span class="subtle tiny">Preview only · never sent</span></div>
+          </div>
+          <div class="test-output" id="testOutput"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head"><div><h2>Connections</h2><p>Only enabled connectors can receive or send messages.</p></div><div class="section-icon">⌁</div></div>
+          <div class="connection-grid">
+            <div class="connection"><strong>Telegram Bot API / Business</strong><span id="telegramStatus">Disabled</span><span id="telegramRights">Waiting for setup</span></div>
+            <div class="connection"><strong>Telegram personal account</strong><span id="telegramUserStatus">Disabled</span><span id="telegramUserConsentSummary">No personal-account session</span></div>
+            <div class="connection"><strong>WhatsApp Web</strong><span id="whatsappStatus">Disabled</span><span>Unofficial connector · opt-in only</span></div>
+            <div class="connection"><strong>AI provider</strong><span id="aiStatus">Checking…</span></div>
+            <div class="connection"><strong>Dashboard</strong><span id="dashboardStatus">Local-only</span></div>
+            <div class="connection"><strong>Private owner reports</strong><span id="ownerNotifyStatus">Not configured</span><span>Set TELEGRAM_OWNER_CHAT_ID in .env after starting a private chat with your bot.</span></div>
+          </div>
+          <p class="disclaimer" style="margin:13px 0 0">The personal Telegram client uses a separate MTProto session and processes only one-to-one private chats with explicit, unexpired consent. Consent notices may send while Dry-run is ON only when their separate flag is enabled; AI replies still obey Dry-run and Busy Mode. Telegram's terms and account/API access restrictions still apply. WhatsApp Web automation is unofficial and may put the linked account at risk.</p>
+          <div class="rule"></div><div class="mini-title">Personal Telegram consent records</div><div class="event-list" id="telegramConsentList"><div class="empty">No consent records yet.</div></div>
+        </section>
+      </div>
+
+      <div class="column">
+        <section class="panel">
+          <div class="panel-head"><div><h2>People & tone profiles</h2><p>Match a sender ID to a relationship profile. Exact identifiers win; everyone else gets the default.</p></div><div class="section-icon">☻</div></div>
+          <div class="profile-list" id="profileList"><div class="empty">Loading profiles…</div></div>
+          <div class="rule"></div>
+          <form id="profileForm">
+            <input id="profileId" type="hidden">
+            <div class="two">
+              <div class="field"><label for="profileName">PROFILE NAME</label><input id="profileName" placeholder="e.g. Family" required maxlength="80"></div>
+              <div class="field"><label for="relationship">RELATIONSHIP TYPE</label><select id="relationship"><option value="family">Family</option><option value="partner">Partner / girlfriend</option><option value="close_friend">Close friend</option><option value="professional">Professional / default</option></select></div>
+            </div>
+            <div class="field" style="margin-top:13px"><label for="identifiers">SENDER IDENTIFIERS</label><textarea id="identifiers" placeholder="One exact identifier per line, e.g. telegram:123456789&#10;whatsapp:15551234567@c.us"></textarea><div class="subtle tiny" style="margin-top:5px">The Activity log shows the exact identifier the connector received. You can paste more than one, separated by a comma or new line. Leave blank for a preset profile until you know the IDs.</div></div>
+            <div class="field" style="margin-top:13px"><label for="toneInstruction">TONE & BEHAVIOR INSTRUCTIONS</label><textarea id="toneInstruction" placeholder="Warm, attentive, casual, use light humor only when it fits…"></textarea></div>
+            <div class="two" style="margin-top:13px">
+              <div class="field"><label for="priority">INTERRUPTION PRIORITY</label><select id="priority"><option value="normal">Normal — classify each message</option><option value="always_alert">Always alert me about this person</option><option value="interrupt">Interrupt Busy Mode for every message</option></select></div>
+              <div class="field" style="display:flex;flex-direction:column;gap:10px;justify-content:flex-end;padding-bottom:3px"><label class="checkline"><input id="allowAnswers" type="checkbox" checked> Let AI answer straightforward questions</label><label class="checkline"><input id="alertUncertain" type="checkbox" checked> Alert me when the AI is unsure</label></div>
+            </div>
+            <div class="form-actions"><button class="primary" type="submit" id="saveProfileBtn">Save profile</button><button type="button" id="newProfileBtn">New profile</button><button type="button" class="danger" id="deleteProfileBtn" style="display:none">Delete profile</button></div>
+          </form>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head"><div><h2>Alerts requiring attention</h2><p>Urgent issues, VIP messages, uncertainty, or a connector problem.</p></div><div class="section-icon">!</div></div>
+          <div id="alertList" class="alert-list"><div class="empty">No alerts yet. That is a good thing.</div></div>
+        </section>
+      </div>
+    </section>
+
+    <section class="bottom-grid">
+      <section class="panel"><div class="panel-head"><div><h2>Recent activity</h2><p>Incoming messages, decisions, sends, and safety skips.</p></div><div class="section-icon">≋</div></div><div class="event-list" id="eventList"><div class="empty">No activity yet.</div></div></section>
+      <section class="panel"><div class="panel-head"><div><h2>Owner priority queue</h2><p>Open issues sorted by urgency. Take over, resume, or mark issues resolved.</p></div><div class="section-icon">↗</div></div><div class="disclaimer" id="queueSummary" style="margin-bottom:10px">Loading unresolved issues…</div><div class="event-list" id="issueList"><div class="empty">No issues yet.</div></div><div class="rule"></div><div class="mini-title">Owner report delivery</div><div class="event-list" id="ownerReportList"><div class="empty">No owner reports yet.</div></div><div class="rule"></div><div class="mini-title">Saved contact memory</div><div class="event-list" id="memoryList"><div class="empty">No contact memories yet.</div></div></section>
+      <section class="panel"><div class="panel-head"><div><h2>Safety rules currently enforced</h2><p>Guardrails applied by the application, not only by the AI.</p></div><div class="section-icon">⬡</div></div>
+        <div class="event-list">
+          <div class="event"><div class="event-dot" style="background:var(--green)"></div><div class="event-main"><strong>Transparent assistant</strong><p>On the first response per Busy Mode session, the assistant identifies itself and explains your availability.</p></div></div>
+          <div class="event"><div class="event-dot" style="background:var(--cyan)"></div><div class="event-main"><strong>You take over, it pauses</strong><p>If you manually reply in a conversation while Busy Mode is active, the assistant records your message and pauses auto-replies in that conversation until the next Busy Mode session.</p></div></div>
+          <div class="event"><div class="event-dot" style="background:var(--red)"></div><div class="event-main"><strong>Urgency and human handoff</strong><p>Credible emergencies escalate. Unclear or sensitive topics can be held for you rather than confidently guessed at.</p></div></div>
+          <div class="event"><div class="event-dot" style="background:var(--purple)"></div><div class="event-main"><strong>Bounded autonomy</strong><p>Maximum eight live auto-replies per contact per Busy Mode session; then replies pause until you review.</p></div></div>
+          <div class="event"><div class="event-dot" style="background:var(--yellow)"></div><div class="event-main"><strong>Local-first</strong><p>History is stored in this project's local JSON file. AI prompts go to the provider you configure; messages stay on your laptop except where platform APIs or the AI provider require otherwise.</p></div></div>
+        </div>
+      </section>
+    </section>
+    <div class="footer"><span>Personal Gatekeeper · MVP 0.1.0</span><span>Keep this dashboard on localhost. Never commit .env or the messaging session folders.</span></div>
+  </main>
+  <div class="notice" id="notice" role="status"></div>
+  <script>
+    const $ = (selector) => document.querySelector(selector);
+    let appState = null;
+    let selectedProfileId = null;
+    let firstLoad = true;
+    let seenAlertIds = new Set();
+    let noticeTimer = null;
+    const relationshipNames = { family: "Family", partner: "Partner", close_friend: "Close friend", professional: "Professional" };
+    const priorityNames = { normal: "Normal", always_alert: "Always alert", interrupt: "Interrupt mode" };
+    const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+    function showNotice(message) { const el = $("#notice"); el.textContent = message; el.classList.add("show"); clearTimeout(noticeTimer); noticeTimer = setTimeout(() => el.classList.remove("show"), 4000); }
+    function toLocalInput(value) { const d = value ? new Date(value) : new Date(Date.now() + 3600000); const safe = new Date(d.getTime() - d.getTimezoneOffset() * 60000); return safe.toISOString().slice(0,16); }
+    function toIso(value) { return value ? new Date(value).toISOString() : null; }
+    function dateTime(value) { if (!value) return "Not set"; const d = new Date(value); return Number.isNaN(d.getTime()) ? value : d.toLocaleString([], {dateStyle:"medium",timeStyle:"short"}); }
+    function timeOnly(value) { if (!value) return "Not set"; const d = new Date(value); return Number.isNaN(d.getTime()) ? value : d.toLocaleTimeString([], {hour:"numeric",minute:"2-digit"}); }
+    function initials(name) { return String(name || "?").split(/\s+/).slice(0,2).map((x) => x[0] || "").join("").toUpperCase(); }
+    async function api(path, options = {}) { const response = await fetch(path, { ...options, headers: { "Content-Type":"application/json", ...(options.headers || {}) } }); const data = await response.json().catch(() => ({})); if (!response.ok) throw new Error(data.error || `Request failed (${response.status})`); return data; }
+    async function refreshState(notify = true) {
+      try {
+        const previousIds = new Set(seenAlertIds);
+        appState = await api("/api/state");
+        seenAlertIds = new Set((appState.alerts || []).map(a => a.id));
+        if (!firstLoad && notify && "Notification" in window && Notification.permission === "granted") {
+          for (const alert of appState.alerts || []) if (!alert.acknowledged && !previousIds.has(alert.id)) new Notification(`Gatekeeper · ${alert.title}`, { body: alert.details.slice(0,140), tag: alert.id });
+        }
+        firstLoad = false;
+        renderAll();
+      } catch (error) { showNotice(`Could not read local app state: ${error.message}`); }
+    }
+    function renderAll() {
+      if (!appState) return;
+      const { mode, dryRun, profiles, events, alerts, connections, telegramBusiness, telegramUser = { status: "not configured", accountId: null, consents: [] }, counts, issues = [], ownerReports = [], memories = [], ownerNotificationsConfigured } = appState;
+      $("#heroMode").textContent = mode.enabled ? "You're in focus mode." : "You're available.";
+      $("#heroReason").textContent = mode.enabled ? `${mode.reason} · expected availability ${timeOnly(mode.availableAt)}` : "Busy Mode is off. Incoming messages will not receive automatic replies.";
+      $("#modeBadge").textContent = mode.enabled ? "BUSY MODE ON" : "BUSY MODE OFF";
+      $("#modeBadge").className = `pill ${mode.enabled ? "success" : ""}`;
+      $("#dryBadge").textContent = dryRun ? "DRY RUN" : "LIVE SENDING";
+      $("#dryBadge").className = `pill ${dryRun ? "warning" : "danger"}`;
+      $("#profileCount").textContent = profiles.length;
+      $("#conversationCount").textContent = `${counts.conversations} conversations`;
+      $("#alertCount").textContent = counts.unacknowledgedAlerts;
+      $("#connectorBadge").textContent = [connections.telegram?.startsWith("connected"), connections.telegramUser?.startsWith("connected"), connections.whatsapp?.startsWith("connected")].some(Boolean) ? "CONNECTOR READY" : "CONNECTORS OFF";
+      $("#modeEnabled").checked = mode.enabled;
+      $("#reason").value = mode.reason || "deep work";
+      $("#availableAt").value = toLocalInput(mode.availableAt);
+      $("#policy").value = mode.policy || "balanced";
+      $("#dryRun").checked = dryRun;
+      $("#dryDescription").textContent = dryRun ? "Simulate decisions; do not send outbound messages." : "LIVE: replies may be sent to real contacts while Busy Mode is on.";
+      $("#telegramStatus").textContent = connections.telegram || "Disabled";
+      $("#telegramRights").textContent = telegramBusiness.connected ? (telegramBusiness.canReply ? "Business connection · reply permission granted" : "Business connection · missing reply permission") : "No active Telegram Business connection";
+      $("#telegramUserStatus").textContent = telegramUser.status || "not configured";
+      const grantedConsents = (telegramUser.consents || []).filter(c => c.status === "granted").length;
+      $("#telegramUserConsentSummary").textContent = `${grantedConsents} active consent(s) · ${ (telegramUser.consents || []).length } recorded chat(s)${telegramUser.accountId ? ` · account ${telegramUser.accountId}` : ""}`;
+      renderTelegramConsents(telegramUser.consents || []);
+      $("#whatsappStatus").textContent = connections.whatsapp || "Disabled";
+      $("#aiStatus").textContent = connections.ai || "Not configured";
+      $("#dashboardStatus").textContent = connections.dashboard || "Local-only";
+      $("#ownerNotifyStatus").textContent = ownerNotificationsConfigured ? "Configured · private bot chat" : "Not configured · see README";
+      renderProfiles(profiles);
+      renderProfileSelect(profiles);
+      renderAlerts(alerts);
+      renderEvents(events);
+      renderIssues(issues);
+      renderOwnerReports(ownerReports);
+      renderMemories(memories);
+    }
+    function renderProfiles(profiles) {
+      const root = $("#profileList");
+      root.innerHTML = profiles.map(p => `<button type="button" class="profile-item ${p.id === selectedProfileId ? "active" : ""}" data-profile="${esc(p.id)}"><span class="avatar">${esc(initials(p.name))}</span><span class="profile-text"><strong>${esc(p.name)}</strong><small>${esc(relationshipNames[p.relationship] || p.relationship)} · ${p.identifiers.length} identifier${p.identifiers.length === 1 ? "" : "s"}</small></span><span class="profile-tag">${esc(priorityNames[p.priority] || p.priority)}</span></button>`).join("");
+      root.querySelectorAll("[data-profile]").forEach(button => button.addEventListener("click", () => loadProfile(button.dataset.profile)));
+    }
+    function renderProfileSelect(profiles) {
+      const select = $("#testProfile"); const current = select.value;
+      select.innerHTML = profiles.map(p => `<option value="${esc(p.id)}">${esc(p.name)} — ${esc(relationshipNames[p.relationship] || p.relationship)}</option>`).join("");
+      if (profiles.some(p => p.id === current)) select.value = current;
+      else select.value = profiles.find(p => p.isDefault)?.id || profiles[0]?.id || "default";
+    }
+    function loadProfile(id) {
+      const profile = appState?.profiles.find(p => p.id === id); if (!profile) return;
+      selectedProfileId = id;
+      $("#profileId").value = profile.id;
+      $("#profileName").value = profile.name;
+      $("#relationship").value = profile.relationship;
+      $("#identifiers").value = profile.identifiers.join("\n");
+      $("#toneInstruction").value = profile.toneInstruction;
+      $("#priority").value = profile.priority;
+      $("#allowAnswers").checked = profile.allowAutonomousAnswers;
+      $("#alertUncertain").checked = profile.alertOnUncertain;
+      $("#deleteProfileBtn").style.display = profile.isDefault ? "none" : "inline-block";
+      $("#saveProfileBtn").textContent = profile.isDefault ? "Update default profile" : "Save changes";
+      renderProfiles(appState.profiles);
+    }
+    function clearProfileForm() {
+      selectedProfileId = null; $("#profileId").value = ""; $("#profileName").value = ""; $("#relationship").value = "family"; $("#identifiers").value = "";
+      $("#toneInstruction").value = "Warm, caring, and natural. Match the sender's energy. Don't pretend to be Ashkan or make promises on his behalf.";
+      $("#priority").value = "normal"; $("#allowAnswers").checked = true; $("#alertUncertain").checked = true;
+      $("#deleteProfileBtn").style.display = "none"; $("#saveProfileBtn").textContent = "Create profile"; if (appState) renderProfiles(appState.profiles);
+    }
+    function renderAlerts(alerts) {
+      const root = $("#alertList");
+      const unacked = alerts.filter(a => !a.acknowledged);
+      if (!unacked.length) { root.innerHTML = `<div class="empty">No unacknowledged alerts. The assistant will add one if something needs your attention.</div>`; return; }
+      root.innerHTML = unacked.slice(0,12).map(a => `<div class="alert-card ${esc(a.severity)}"><div class="alert-symbol">${a.severity === "urgent" ? "!" : a.severity === "vip" ? "★" : a.severity === "system" ? "⚙" : "?"}</div><div class="alert-main"><strong>${esc(a.title)}</strong><p>${esc(a.details)}</p><div class="alert-meta">${esc(dateTime(a.at))}${a.platform ? ` · ${esc(a.platform)}` : ""}${a.contactKey ? ` · ${esc(a.contactKey)}` : ""}</div></div><button type="button" class="small" data-ack="${esc(a.id)}">Done</button></div>`).join("");
+      root.querySelectorAll("[data-ack]").forEach(button => button.addEventListener("click", async () => { try { await api(`/api/alerts/${encodeURIComponent(button.dataset.ack)}/acknowledge`, {method:"POST",body:"{}"}); await refreshState(false); } catch(e) { showNotice(e.message); } }));
+    }
+    function renderIssues(issues) {
+      const root = $("#issueList");
+      const urgent = issues.filter(i => i.priority === "urgent").length;
+      $("#queueSummary").textContent = `${issues.length} unresolved · ${urgent} urgent · sorted by priority and latest activity`;
+      if (!issues.length) { root.innerHTML = `<div class="empty">Your queue is clear. Unresolved conversations will appear here.</div>`; return; }
+      root.innerHTML = issues.slice(0, 25).map(issue => {
+        const paused = (appState.conversationControls || []).find(c => c.contactKey === issue.contactKey)?.autoPaused === true;
+        const cls = issue.priority === "urgent" ? "danger" : issue.priority === "high" ? "warning" : "";
+        return `<div class="alert-card ${issue.priority === "urgent" ? "urgent" : issue.priority === "high" ? "vip" : ""}"><div class="alert-main"><strong><span class="pill ${cls}">${esc(issue.priority)}</span> ${esc(issue.senderName)} · ${esc(issue.platform)}</strong><p>${esc(issue.summary)}</p><p><b>Next:</b> ${esc(issue.nextAction || "Review when available")}</p><div class="alert-meta">${esc(dateTime(issue.lastActivityAt))} · ${esc(issue.id)}</div><div class="form-actions"><button type="button" class="small" data-issue-control="${paused ? "resume" : "takeover"}" data-contact="${esc(issue.contactKey)}">${paused ? "Resume AI" : "Take over"}</button><button type="button" class="small" data-resolve-issue="${esc(issue.id)}">Mark resolved</button></div></div></div>`;
+      }).join("");
+      root.querySelectorAll("[data-issue-control]").forEach(button => button.addEventListener("click", async () => {
+        const action = button.dataset.issueControl; const key = button.dataset.contact;
+        try { await api(`/api/conversations/${encodeURIComponent(key)}/${action}`, {method:"POST",body:"{}"}); showNotice(action === "takeover" ? "AI replies paused for this conversation." : "AI handling resumed for this conversation."); await refreshState(false); }
+        catch(error) { showNotice(error.message); }
+      }));
+      root.querySelectorAll("[data-resolve-issue]").forEach(button => button.addEventListener("click", async () => {
+        const resolution = prompt("Resolution note (optional):", "Reviewed and resolved by owner."); if (resolution === null) return;
+        try { await api(`/api/issues/${encodeURIComponent(button.dataset.resolveIssue)}/resolve`, {method:"POST",body:JSON.stringify({resolution})}); showNotice("Issue resolved."); await refreshState(false); }
+        catch(error) { showNotice(error.message); }
+      }));
+    }
+    function renderTelegramConsents(consents) {
+      const root = $("#telegramConsentList");
+      if (!root) return;
+      if (!consents.length) { root.innerHTML = `<div class="empty">No personal Telegram consent records yet. Records appear when a private contact replies to the consent notice.</div>`; return; }
+      root.innerHTML = consents.slice(0, 30).map(c => {
+        const active = c.status === "granted" && (!c.expiresAt || Date.parse(c.expiresAt) > Date.now());
+        const cls = active ? "success" : c.status === "declined" || c.status === "revoked" ? "danger" : "warning";
+        return `<div class="event"><div class="event-top"><strong>${esc(c.senderName)}</strong><span class="pill ${cls}">${esc(active ? "active" : c.status)}</span></div><p>${esc(c.scope || "Private chat only")}</p><div class="event-meta">Chat ${esc(c.chatId)}${c.expiresAt ? ` · expires ${esc(dateTime(c.expiresAt))}` : ""}</div></div>`;
+      }).join("");
+    }
+    function renderOwnerReports(reports) {
+      const root = $("#ownerReportList");
+      if (!reports.length) { root.innerHTML = `<div class="empty">Reports appear here after issue escalation or Busy Mode ends.</div>`; return; }
+      root.innerHTML = reports.slice(0, 8).map(report => `<div class="event"><div class="event-dot" style="background:${report.delivered ? "var(--green)" : "var(--red)"}"></div><div class="event-main"><strong>${report.delivered ? "Delivered to owner chat" : "Not delivered"}</strong><p>${esc(report.summary)}${report.error ? ` · ${esc(report.error)}` : ""}</p><div class="event-time">${esc(dateTime(report.at))}</div></div></div>`).join("");
+    }
+    function renderMemories(memories) {
+      const root = $("#memoryList");
+      if (!memories.length) { root.innerHTML = `<div class="empty">No saved contact memory yet. The AI may add useful context after a message.</div>`; return; }
+      root.innerHTML = memories.slice(0, 12).map(memory => `<div class="event"><div class="event-dot" style="background:var(--cyan)"></div><div class="event-main"><strong>${esc(memory.contactKey)}</strong><p>${esc(memory.summary || "No summary")} · ${Number(memory.factsCount || 0)} saved fact(s)</p>${(memory.facts || []).length ? `<p><b>Facts:</b> ${memory.facts.map(fact => esc(fact)).join(" · ")}</p>` : ""}<div class="event-time">Updated ${esc(dateTime(memory.updatedAt))} <button type="button" class="small" data-delete-memory="${esc(memory.contactKey)}">Delete memory</button></div></div></div>`).join("");
+      root.querySelectorAll("[data-delete-memory]").forEach(button => button.addEventListener("click", async () => {
+        if (!confirm(`Delete saved memory for ${button.dataset.deleteMemory}? Recent conversation history will remain.`)) return;
+        try { await api(`/api/memories/${encodeURIComponent(button.dataset.deleteMemory)}`, {method:"DELETE"}); showNotice("Contact memory deleted."); await refreshState(false); }
+        catch(error) { showNotice(error.message); }
+      }));
+    }
+
+    function eventLabel(event) {
+      return ({message_received:"Received",owner_message_observed:"You replied manually",decision:"Decision",message_sent:"Reply",message_skipped:"Skipped",connector:"Connector",error:"Error",mode:"Mode"})[event.kind] || event.kind;
+    }
+    function renderEvents(events) {
+      const root = $("#eventList");
+      if (!events.length) { root.innerHTML = `<div class="empty">No activity yet. Enable a connector and test it in dry-run.</div>`; return; }
+      root.innerHTML = events.slice(0,28).map(e => `<div class="event"><div class="event-dot" style="background:${e.kind === "error" ? "var(--red)" : e.action === "urgent" ? "var(--red)" : e.kind === "message_sent" ? "var(--green)" : "var(--purple)"}"></div><div class="event-main"><strong>${esc(eventLabel(e))}</strong>${e.platform ? `<span class="pill">${esc(e.platform)}</span>` : ""}${e.action ? ` <span class="pill ${e.action === "urgent" ? "danger" : ""}">${esc(e.action)}</span>` : ""}${e.dryRun ? ` <span class="pill warning">dry run</span>` : ""}<p>${e.senderName ? `<b>${esc(e.senderName)}:</b> ` : ""}${esc(e.details)}</p><div class="event-time">${esc(dateTime(e.at))}${e.contactKey ? ` · ID: ${esc(e.contactKey)}` : ""}</div></div></div>`).join("");
+    }
+
+    $("#modeForm").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      try {
+        const enabled = $("#modeEnabled").checked;
+        const availableAt = toIso($("#availableAt").value);
+        if (enabled && availableAt && new Date(availableAt).getTime() <= Date.now()) throw new Error("Choose a finish time in the future.");
+        await api("/api/mode", { method:"POST", body:JSON.stringify({ enabled, reason:$("#reason").value, availableAt, policy:$("#policy").value }) });
+        showNotice(enabled ? "Busy Mode enabled. Check dry-run before live sending." : "Busy Mode saved as off.");
+        await refreshState(false);
+      } catch (error) { showNotice(error.message); }
+    });
+    $("#disableModeBtn").addEventListener("click", async () => {
+      try { await api("/api/mode", {method:"POST",body:JSON.stringify({enabled:false,reason:$("#reason").value,availableAt:toIso($("#availableAt").value),policy:$("#policy").value})}); showNotice("Busy Mode turned off."); await refreshState(false); }
+      catch(e) { showNotice(e.message); }
+    });
+    $("#dryRun").addEventListener("change", async (event) => {
+      const enableLive = !event.target.checked;
+      if (enableLive && !confirm("LIVE SENDING: the assistant may send real messages to contacts. Continue only if you have tested decisions, checked sender IDs, and understand your connector risks.")) { event.target.checked = true; return; }
+      try { await api("/api/dry-run", {method:"POST",body:JSON.stringify({enabled:event.target.checked})}); showNotice(event.target.checked ? "Dry-run enabled. No outgoing messages will be sent." : "Live sending enabled. Keep Busy Mode off until ready."); await refreshState(false); }
+      catch(e) { showNotice(e.message); }
+    });
+    $("#profileForm").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      try {
+        const payload = { id:$("#profileId").value || undefined, name:$("#profileName").value, relationship:$("#relationship").value, identifiers:$("#identifiers").value, toneInstruction:$("#toneInstruction").value, priority:$("#priority").value, allowAutonomousAnswers:$("#allowAnswers").checked, alertOnUncertain:$("#alertUncertain").checked };
+        const result = await api("/api/profiles", {method:"POST",body:JSON.stringify(payload)});
+        selectedProfileId = result.profile.id;
+        showNotice("Profile saved. The new tone applies to matching sender IDs.");
+        await refreshState(false); loadProfile(selectedProfileId);
+      } catch(e) { showNotice(e.message); }
+    });
+    $("#newProfileBtn").addEventListener("click", clearProfileForm);
+    $("#deleteProfileBtn").addEventListener("click", async () => {
+      if (!selectedProfileId || !confirm("Delete this profile? Matching senders will fall back to the default profile.")) return;
+      try { await api(`/api/profiles/${encodeURIComponent(selectedProfileId)}`,{method:"DELETE"}); clearProfileForm(); showNotice("Profile deleted."); await refreshState(false); }
+      catch(e) { showNotice(e.message); }
+    });
+    $("#testBtn").addEventListener("click", async () => {
+      const message = $("#testMessage").value.trim(); if (!message) { showNotice("Enter a sample message first."); return; }
+      const button = $("#testBtn"); button.disabled = true; button.textContent = "Thinking…";
+      try {
+        const result = await api("/api/test-decision", {method:"POST",body:JSON.stringify({profileId:$("#testProfile").value,senderName:$("#testSender").value,message})});
+        const d = result.decision; const root = $("#testOutput"); root.classList.add("show");
+        const cls = d.action === "urgent" ? "danger" : d.action === "answer" ? "success" : "warning";
+        root.innerHTML = `<div class="decision-top"><span class="pill ${cls}">${esc(d.action)}</span><span class="decision-name">Urgency ${(Number(d.urgency)*100).toFixed(0)}%</span><span class="decision-name muted">Confidence ${(Number(d.confidence)*100).toFixed(0)}%</span></div><div class="decision-reply"></div><div class="decision-summary"></div><div class="disclaimer" style="margin-top:10px">Preview only — this reply was not sent to a contact.</div>`;
+        root.querySelector(".decision-reply").textContent = d.reply || "No reply returned.";
+        root.querySelector(".decision-summary").textContent = `${d.summary || ""}${d.ownerAlert ? ` · Owner alert: ${d.alertReason || "yes"}` : " · No owner alert requested"}`;
+      } catch(e) { showNotice(e.message); }
+      finally { button.disabled = false; button.textContent = "Run decision preview"; }
+    });
+    $("#refreshBtn").addEventListener("click", () => refreshState(false));
+    $("#notifyBtn").addEventListener("click", async () => {
+      if (!("Notification" in window)) return showNotice("Desktop notifications are not supported by this browser.");
+      const permission = await Notification.requestPermission();
+      showNotice(permission === "granted" ? "Desktop alerts enabled while this dashboard is open." : "Notifications were not enabled. Alerts remain visible here and in the terminal.");
+    });
+    refreshState(false);
+    setInterval(() => refreshState(true), 5000);
+  </script>
+</body>
+</html>
